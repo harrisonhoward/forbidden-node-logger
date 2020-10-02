@@ -2,26 +2,26 @@
 A powerful and efficient JavaScript logger for NodeJS
 
 ```
-npm install node-console-logger
+npm install forbidden-node-logger
 ```
 
 ## Getting Started
 
 ### Logger (No File Support)
 ```js
-const NodeLogger = require("node-console-logger");
+const NodeLogger = require("forbidden-node-logger");
 const Logger = new NodeLogger();
 ```
 
 ### Logger (File Support)
 ```js
-const NodeLogger = require("node-console-logger");
+const NodeLogger = require("forbidden-node-logger");
 const Logger = new NodeLogger({ dirPath: __dirname + "/log" });
 ```
 
 ### Logger Basics
 ```js
-const NodeLogger = require("node-console-logger");
+const NodeLogger = require("forbidden-node-logger");
 const Logger = new NodeLogger({ dirPath: __dirname + "/log" });
 
 Logger.on("log", log => { /* Code */ }) // Emits when logging with any method
