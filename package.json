@@ -19,5 +19,13 @@
     "break": "node test/break.js"
   },
   "author": "Duck#9999",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Forbidden-Duck/node-logger-js.git"
+  },
+  "homepage": "https://github.com/Forbidden-Duck/node-logger-js",
+  "bugs": {
+    "url": "https://github.com/Forbidden-Duck/node-logger-js/issues"
+  }
 }
