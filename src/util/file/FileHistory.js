@@ -23,9 +23,10 @@ module.exports = class FileHistory {
         this._handleCatch = this._handleCatch.bind(this);
 
         this.Logger.on("log", async (log) => {
-            const writeFile = `${this.dirPath}${this.year()}/${this.month()}/${this.day()}.log`;
-            await ReadWrite.dirIfNotExists(`${this.dirPath}${this.year()}/${this.month()}`).catch(this._handleCatch);
-            await ReadWrite.write(writeFile, `${Logger.prefix()}${Logger.seperator}${log.clean()}\n`).catch(this._handleCatch);;
+            const writeFile = `${this.dirPath}${this.year()}/${this.month()}`;
+            await ReadWrite.dirIfNotExists(writeFile).catch(this._handleCatch);
+            await ReadWrite
+                .write(`${writeFile}/${this.day()}.log`, `${Logger.prefix()}${Logger.seperator}${log.clean()}\n`).catch(this._handleCatch);;
         });
     }
 
@@ -34,9 +35,9 @@ module.exports = class FileHistory {
      * @returns {Promise<String[]>}
     */
     async getCurrentLog() {
-        const readFile = `${this.dirPath}${this.year()}/${this.month()}/${this.day()}.log`;
-        await ReadWrite.dirIfNotExists(`${this.dirPath}${this.year()}/${this.month()}`).catch(this._handleCatch);;
-        return await ReadWrite.read(readFile).catch(this._handleCatch);;
+        const readFile = `${this.dirPath}${this.year()}/${this.month()}`;
+        await ReadWrite.dirIfNotExists(readFile).catch(this._handleCatch);;
+        return await ReadWrite.read(`${readFile}/${this.day()}.log`).catch(this._handleCatch);;
     }
 
     /**
