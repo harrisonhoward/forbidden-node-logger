@@ -9,9 +9,6 @@ module.exports = class FileHistory {
     */
     constructor(dirPath, Logger) {
         this.dirPath = dirPath;
-        if (!this.dirPath.endsWith("/")) {
-            this.dirPath += "/";
-        }
         this.Logger = Logger;
         this.waiting = false;
 
@@ -19,12 +16,17 @@ module.exports = class FileHistory {
         this.month = (() => { return new Date().getMonth().toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) });
         this.day = (() => { return new Date().getDate().toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) });
 
+        if (!this.dirPath.endsWith("/")) {
+            this.dirPath += "/";
+        }
+
+        this._handleCatch = this._handleCatch.bind(this);
+
         this.Logger.on("log", async (log) => {
             const writeFile = `${this.dirPath}${this.year()}/${this.month()}/${this.day()}.log`;
             await ReadWrite.dirIfNotExists(`${this.dirPath}${this.year()}/${this.month()}`).catch(this._handleCatch);
             await ReadWrite.write(writeFile, `${Logger.prefix()}${Logger.seperator}${log.clean()}\n`).catch(this._handleCatch);;
         });
-        this._handleCatch = this._handleCatch.bind(this);
     }
 
     /**
