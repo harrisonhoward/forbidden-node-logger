@@ -18,7 +18,7 @@ module.exports = class Log {
             } else if (typeof log === "object") {
                 this._log += JSON.stringify(log);
             } else {
-                return this.error("log must be a \"string\" or \"object\""); // TEMPORARY
+                throw new Error("log must be a \"string\" or \"object\"");
             }
             const index = logs.indexOf(log);
             if (logs.length > 1 && index < logs.length - 1) {
