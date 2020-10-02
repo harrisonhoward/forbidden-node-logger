@@ -36,10 +36,6 @@ module.exports = class Logger extends EventEmitter {
             if (typeof this._dirPath !== "string") {
                 throw new Error(".dirPath is not a string");
             }
-            // Remove ending forward slash
-            if (this._dirPath.endsWith("/")) {
-                this._dirPath = this._dirPath.substr(0, this._dirPath.length - 1);
-            }
             // Remove extension
             if (this._dirPath.match(/\.[0-9a-z]{1,10}$/i)) {
                 this._dirPath = this._dirPath.replace(/\.[0-9a-z]{1,10}$/i, "");
