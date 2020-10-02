@@ -1,0 +1,20 @@
+{
+  "name": "node-logger",
+  "version": "1.0.0",
+  "description": "Logger package built for NodeJS",
+  "keywords": [
+    "console",
+    "logger",
+    "log",
+    "node",
+    "nodejs"
+  ],
+  "main": "./src/index.js",
+  "scripts": {
+    "log": "node test/log.js",
+    "history": "node test/history.js",
+    "break": "node test/break.js"
+  },
+  "author": "Duck#9999",
+  "license": "MIT"
+}
