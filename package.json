@@ -1,5 +1,5 @@
 {
-  "name": "node-logger-js",
+  "name": "node-console-logger",
   "version": "1.0.0",
   "description": "Logger package built for NodeJS",
   "keywords": [
