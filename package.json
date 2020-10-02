@@ -22,10 +22,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Forbidden-Duck/node-logger-js.git"
+    "url": "git+https://github.com/Forbidden-Duck/forbidden-node-logger.git"
   },
-  "homepage": "https://github.com/Forbidden-Duck/node-logger-js",
+  "homepage": "https://github.com/Forbidden-Duck/forbidden-node-logger",
   "bugs": {
-    "url": "https://github.com/Forbidden-Duck/node-logger-js/issues"
+    "url": "https://github.com/Forbidden-Duck/forbidden-node-logger/issues"
   }
 }
