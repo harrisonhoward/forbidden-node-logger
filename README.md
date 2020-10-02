@@ -1,12 +1,12 @@
 Read [Github](https://github.com/Forbidden-Duck/forbidden-node-logger) README, in case of unpublished changes
 # NodeJS Console Logger
 A powerful and efficient JavaScript logger for NodeJS
-[![NPM Version](https://badgen.net/npm/v/forbidden-node-logger)](https://www.npmjs.com/package/forbidden-node-logger)
-[![NPM Downloads](https://badgen.net/npm/dm/forbidden-node-logger)](https://www.npmjs.com/package/forbidden-node-logger)
 
 ```
 npm install forbidden-node-logger
 ```
+[![NPM Version](https://badgen.net/npm/v/forbidden-node-logger)](https://www.npmjs.com/package/forbidden-node-logger)
+[![NPM Downloads](https://badgen.net/npm/dm/forbidden-node-logger)](https://www.npmjs.com/package/forbidden-node-logger)
 
 ## Getting Started
 
