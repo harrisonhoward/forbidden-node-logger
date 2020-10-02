@@ -8,7 +8,7 @@ module.exports = class ReadWrite {
      * @param {String} line Line that is written to the file
      * @returns {Promise<true | Error>} Whether the write caused an error
     */
-    static async write(pathToFile, line) {
+    static write(pathToFile, line) {
         return new Promise((resolve, reject) => {
             fs.appendFile(pathToFile, line, err => {
                 if (err) {
@@ -46,8 +46,8 @@ module.exports = class ReadWrite {
      * @returns {Promise<Boolean>}
     */
     static async dirIfNotExists(pathToFile) {
-        if (!fs.existsSync(pathToFile)) {
-            fs.mkdirSync(pathToFile, { recursive: true });
+        if (!await fs.existsSync(pathToFile)) {
+            await fs.mkdirSync(pathToFile, { recursive: true });
             return true;
         }
         return false;
