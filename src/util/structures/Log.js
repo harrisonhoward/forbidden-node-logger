@@ -12,9 +12,13 @@ module.exports = class Log {
         this._dateAdded = new Date().valueOf();
         this._seperator = seperator;
         this._log = "";
+
         for (const log of logs) {
             if (typeof log === "string") {
                 this._log += log;
+            } else if (typeof log.stack === "string"
+                || typeof log.message === "string") {
+                this._log += log.stack ? log.stack : log.message;
             } else if (typeof log === "object") {
                 this._log += JSON.stringify(log);
             } else {
