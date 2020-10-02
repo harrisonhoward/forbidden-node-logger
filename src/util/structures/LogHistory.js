@@ -7,11 +7,12 @@ module.exports = class LogHistory extends Map {
     */
     constructor(maxSize = 1000) {
         super();
-        if (!maxSize || isNaN(maxSize)) {
-            throw new Error("maxSize is not a number");
-        }
         this._maxSize = maxSize;
         this._index = 0;
+
+        if (!this._maxSize || isNaN(this._maxSize)) {
+            throw new Error(".maxSize is not a number");
+        }
     }
 
     /**
@@ -84,7 +85,7 @@ module.exports = class LogHistory extends Map {
     /**
      * Gets the key of a log from the collection
      * @param {Log} log 
-     * @returns {Number | undefined} The key
+     * @returns {Number | undefined}
     */
     getKey(log) {
         if (!key && !key instanceof Log) {
