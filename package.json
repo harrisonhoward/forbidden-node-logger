@@ -7,7 +7,10 @@
     "logger",
     "log",
     "node",
-    "nodejs"
+    "nodejs",
+    "js",
+    "colour",
+    "color"
   ],
   "main": "./src/index.js",
   "scripts": {
