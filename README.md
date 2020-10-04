@@ -71,7 +71,7 @@ Located at *test/break.js*
 ## Colour Codes
 **PREFIX**: `&`
 
-### SPECIAL
+### Special
 **RESET**: `r`\
 **REVERSE**: `k`
 
