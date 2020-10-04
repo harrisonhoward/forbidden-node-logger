@@ -116,7 +116,7 @@ module.exports = class Logger extends EventEmitter {
 
     /**
      * Contains all the colour codes and log types
-     * @returns {Object} 
+     * @returns {JSON} 
     */
     get CONFIG() {
         return require("./config.json");
