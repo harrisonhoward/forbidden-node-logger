@@ -11,7 +11,7 @@ declare namespace NodeLogger {
     export class Logger extends EventEmitter {
         constructor(options?: LoggerOptions, seperator?: string);
         private _seperator: string;
-        private _prefix: string;
+        private _prefix: LoggerPrefixFunction;
         private _dirPath: string;
         private _history: LogHistory;
         private _fileHistory: FileHistory | undefined;
