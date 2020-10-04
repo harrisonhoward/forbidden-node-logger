@@ -10,7 +10,6 @@ module.exports = class FileHistory {
     constructor(dirPath, Logger) {
         this.dirPath = dirPath;
         this.Logger = Logger;
-        this.waiting = false;
 
         this.year = (() => { return new Date().getFullYear() });
         this.month = (() => { return new Date().getMonth().toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) });
