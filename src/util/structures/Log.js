@@ -108,7 +108,6 @@ module.exports = class Log {
     /**
      * The colour codes available
      * @returns {String}
-     * @abstract
     */
     get _CODES() {
         return [
