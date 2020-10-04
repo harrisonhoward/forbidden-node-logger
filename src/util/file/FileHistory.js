@@ -34,7 +34,7 @@ module.exports = class FileHistory {
      * Get lines from the current log file
      * @returns {Promise<String[]>}
     */
-    async getCurrentLog() {
+    async getLatestLog() {
         const readFile = `${this.dirPath}${this.year()}/${this.month()}`;
         return await ReadWrite.read(`${readFile}/${this.day()}.log`).catch(this._handleCatch);
     }

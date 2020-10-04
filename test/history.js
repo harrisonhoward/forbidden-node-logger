@@ -22,4 +22,4 @@ console.log("\nGet Log 5");
 console.log(Logger.history.get(log5));
 
 console.log("\nGet Current Log");
-Logger.fileHistory.getCurrentLog().then(arr => console.log(arr));
+Logger.fileHistory.getLatestLog().then(arr => console.log(arr));

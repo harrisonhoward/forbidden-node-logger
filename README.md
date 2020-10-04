@@ -35,7 +35,7 @@ Logger.log("&6Logger&r with &3colour");
 Logger.eventLog("Log with no event emit"); // Look at "test/break.js" as why this exists
 
 Logger.history.last(2); // Get the last 2 logs
-Logger.fileHistory.getCurrentLog().then(lines => Logger.eventLog(lines)); // Log an array of lines from the latest log file
+Logger.fileHistory.getLatestLog().then(lines => Logger.eventLog(lines)); // Log an array of lines from the latest log file
 ```
 
 ### Avoid Unhandled Rejection
