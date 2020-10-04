@@ -26,7 +26,7 @@ module.exports = class FileHistory {
             const writeFile = `${this.dirPath}${this.year()}/${this.month()}`;
             await ReadWrite.dirIfNotExists(writeFile).catch(this._handleCatch);
             await ReadWrite
-                .write(`${writeFile}/${this.day()}.log`, `${Logger.prefix()}${Logger.seperator}${log.clean()}\n`).catch(this._handleCatch);;
+                .write(`${writeFile}/${this.day()}.log`, `${Logger.prefix()}${Logger.seperator}${log.clean()}\n`).catch(this._handleCatch);
         });
     }
 
@@ -36,8 +36,7 @@ module.exports = class FileHistory {
     */
     async getCurrentLog() {
         const readFile = `${this.dirPath}${this.year()}/${this.month()}`;
-        await ReadWrite.dirIfNotExists(readFile).catch(this._handleCatch);;
-        return await ReadWrite.read(`${readFile}/${this.day()}.log`).catch(this._handleCatch);;
+        return await ReadWrite.read(`${readFile}/${this.day()}.log`).catch(this._handleCatch);
     }
 
     /**
