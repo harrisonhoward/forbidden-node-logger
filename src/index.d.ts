@@ -1,0 +1,86 @@
+import { EventEmitter } from "events";
+
+declare namespace NodeLogger {
+    type Key = number;
+    type LoggerPrefixFunction = () => string;
+    interface LoggerOptions {
+        prefix?: LoggerPrefixFunction,
+        dirPath?: string
+    }
+
+    export class Logger extends EventEmitter {
+        constructor(options?: LoggerOptions, seperator?: string);
+        private _seperator: string;
+        private _prefix: string;
+        private _dirPath: string;
+        private _history: LogHistory;
+        private _fileHistory: FileHistory | undefined;
+        public log(...log: (string | object)[]): Log;
+        public eventLog(...log: (string | object)[]): Log;
+        public info(...log: (string | object)[]): Log;
+        public debug(...log: (string | object)[]): Log;
+        public warn(...log: (string | object)[]): Log;
+        public error(...log: (string | object)[]): Log;
+        public readonly CONFIG: JSON;
+        public readonly history: LogHistory;
+        public readonly fileHistory: FileHistory;
+        public readonly prefix: LoggerPrefixFunction;
+        public readonly dirPath: string;
+        public readonly seperator: string;
+    }
+
+    export class Log {
+        constructor(prefix: string, seperator: string, ...logs: (string | object)[]);
+        private _prefix: string;
+        private _dateAdded: number;
+        private _seperator: string;
+        private _log: string;
+        public format(): string;
+        public clean(): string;
+        public readonly prefix: string;
+        public readonly seperator: string;
+        public readonly log: string;
+        public readonly dateAdded: number;
+        public readonly _CODES: string;
+    }
+
+    export class LogHistory extends Map<Key, Log> {
+        constructor(maxSize: number);
+        private _maxSize: number;
+        private _index: number;
+        public add(log: Log): this;
+        public _set(key: Key, log: Log): this;
+        public get(key: Key | Log): Log | undefined;
+        public getKey(log: Log): Key | undefined;
+        public find(callbackFn: (value: Log, key: Key, collection: this) => boolean): Log | undefined;
+        public find<T>(callbackFn: (this: T, value: Log, key: Key, collection: this) => boolean, thisArg: T): Log | undefined;
+        public filter(callbackFn: (value: Log, key: Key, collection: this) => boolean): this;
+        public filter<T>(callbackFn: (this: T, value: Log, key: Key, collection: this) => boolean, thisArg: T): this;
+        public map<T>(callbackFn: (value: Log, key: Key, collection: this) => T): T[];
+        public map<This, T>(callbackFn: (this: This, value: Log, key: Key, collection: this, thisArg: This) => T);
+        public delete(key: Key | Log): boolean;
+        public clear(): void;
+        public first(): Log;
+        public first(amount: number): Log[];
+        public last(): Log;
+        public last(amount: number): Log[];
+        public toArray(): Log[];
+    }
+
+    export class ReadWrite {
+        public static write(pathToFile: string, line: string): Promise<true | Error>;
+        public static read(pathToFile: string): Promise<string[]>;
+        public static dirIfNotExists(pathToFile: string): Promise<boolean>;
+    }
+
+    export class FileHistory {
+        constructor(dirPath: string, Logger: Logger);
+        private dirPath: string;
+        private Logger: Logger;
+        private year: () => number;
+        private month: () => string;
+        private day: () => string;
+        private _handleCatch(err: Error): void;
+        public getLatestLog(): Promise<string[]>;
+    }
+}
