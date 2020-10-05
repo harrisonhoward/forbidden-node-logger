@@ -53,6 +53,42 @@ Logger.on("error", () => { }); // This only applies to those who are not in need
 Logger.error("My Error");
 ```
 
+## File Structure
+```
+yyyy ->
+    mm ->
+        dd.log
+        dd-warn.log
+        dd-error.log
+```
+### Example
+```
+2019 ->
+    09 ->
+        01.log
+        01-error.log
+    10 ->
+        03.log
+        04.log
+        05.log
+        06.log
+        06-warn.log
+        07.log
+        07-error.log
+2020 ->
+    01 ->
+        01.log
+        01-error.log
+    02 ->
+        03.log
+        04.log
+        05.log
+        06.log
+        06-warn.log
+        07.log
+        07-error.log
+```
+
 ## Test Scripts
 In the project directory you can run the following scripts:
 
