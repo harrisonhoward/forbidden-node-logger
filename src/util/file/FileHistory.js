@@ -42,7 +42,7 @@ module.exports = class FileHistory {
      * @param {Number} year If not provided. Current year
      * @returns {Promise<void | Array<String>>}
     */
-    async getLogByDay(day, month = new Date().getMonth(), year = new Date().getFullYear()) {
+    async getLogByDay(day = undefined, month = new Date().getMonth(), year = new Date().getFullYear()) {
         if (!day) {
             return this.getLatestLog();
         }
