@@ -1,6 +1,7 @@
 const Logger = require("../../index");
 const ReadWrite = require("./ReadWrite");
 const fs = require("fs");
+const removeFileExtension = /(-[a-z]{1,10}){0,1}[.]log/gi;
 
 module.exports = class FileHistory {
     /**
@@ -83,9 +84,9 @@ module.exports = class FileHistory {
         await ReadWrite.dirIfNotExists(readDir).catch(this._handleCatch);
         return new Promise(resolve => {
             fs.readdirSync(readDir)
-                .filter(file => file.endsWith(".log") && !isNaN(file.replace(/[.]log/gi, "")))
+                .filter(file => file.endsWith(".log") && !isNaN(file.replace(removeFileExtension, "")))
                 .forEach(async (file, index, files) => {
-                    const fileName = parseInt(file.replace(/[.]log/gi, ""));
+                    const fileName = parseInt(file.replace(removeFileExtension, ""));
                     logs[fileName] = await this.getLogByDay(fileName, month, year);
                     if (index == files.length - 1) {
                         resolve(logs);
