@@ -1,7 +1,7 @@
 const Logger = require("../../index");
 const ReadWrite = require("./ReadWrite");
 const fs = require("fs");
-const removeFileExtension = /(-[a-z]{1,10}){0,1}[.]log/gi;
+const removeFileExtension = /[.]log/gi;
 
 module.exports = class FileHistory {
     /**
@@ -24,10 +24,13 @@ module.exports = class FileHistory {
         this._handleCatch = this._handleCatch.bind(this);
 
         this.Logger.on("log", async (log) => {
-            const writeFile = `${this.dirPath}${this.year()}/${this.month()}`;
-            await ReadWrite.dirIfNotExists(writeFile).catch(this._handleCatch);
-            await ReadWrite
-                .write(`${writeFile}/${this.day()}.log`, `${Logger.prefix()}${Logger.seperator}${log.clean()}\n`).catch(this._handleCatch);
+            await this.writeNewLog(log);
+        });
+        this.Logger.on("warn", async (log) => {
+            await this.writeNewLog(log, "-warn");
+        });
+        this.Logger.on("error", async (log) => {
+            await this.writeNewLog(log, "-error");
         });
     }
 
@@ -138,5 +141,20 @@ module.exports = class FileHistory {
     */
     _handleCatch(err) {
         this.Logger.eventLog(`&_4&-0[ERROR]&r&-4`, err.stack);
+    }
+
+    /**
+     * 
+     * @param {Log} log 
+     * @param {String} name 
+    */
+    async writeNewLog(log, name = "") {
+        const writeFile = `${this.dirPath}${this.year()}/${this.month()}`;
+        await ReadWrite.dirIfNotExists(writeFile).catch(this._handleCatch);
+        await ReadWrite
+            .write(
+                `${writeFile}/${this.day()}${name}.log`,
+                `${this.Logger.prefix()}${this.Logger.seperator}${log.clean()}\n`).catch(this._handleCatch
+                );
     }
 }
