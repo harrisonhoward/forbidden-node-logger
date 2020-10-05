@@ -21,5 +21,21 @@ console.log(Logger.history.last(2).map(log => { return { prefix: log.prefix, sep
 console.log("\nGet Log 5");
 console.log(Logger.history.get(log5));
 
-console.log("\nGet Current Log");
-Logger.fileHistory.getLatestLog().then(arr => console.log(arr));
+console.log("\nGet Latest Log");
+Logger.fileHistory.getLatestLog()
+    .then(arr => console.log(arr))
+    .then(() => {
+        console.log("\nGet Log by Day"); // Should look the same as getLatestLog()
+        Logger.fileHistory.getLogByDay(new Date().getDate())
+            .then(arr => console.log(arr))
+            .then(() => {
+                console.log("\nGet Logs by Month");
+                Logger.fileHistory.getLogsByMonth(new Date().getMonth())
+                    .then(obj => console.log(obj))
+                    .then(() => {
+                        console.log("\nGet Logs by Year");
+                        Logger.fileHistory.getLogsByYear(new Date().getFullYear())
+                            .then(obj => console.log(obj));
+                    });
+            });
+    });
