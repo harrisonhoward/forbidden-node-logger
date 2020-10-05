@@ -81,6 +81,9 @@ declare namespace NodeLogger {
         private month: () => string;
         private day: () => string;
         private _handleCatch(err: Error): void;
-        public getLatestLog(): Promise<string[]>;
+        public getLatestLog(): Promise<void | string[]>;
+        public getLogByDay(day?: number, month?: number, year?: number): Promise<void | string[]>;
+        public getLogsByMonth(month?: number, year?: number): Promise<object>;
+        public getLogsByYear(year?: number): Promise<object>;
     }
 }
