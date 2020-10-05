@@ -1,4 +1,5 @@
 const Logger = require("../../index");
+const Log = require("../structures/Log");
 const ReadWrite = require("./ReadWrite");
 const fs = require("fs");
 const removeFileExtension = /[.]log/gi;
@@ -39,7 +40,7 @@ module.exports = class FileHistory {
      * @param {Number} day If not provided. Executed like getLatestLog()
      * @param {Number} month If not provided. Current month
      * @param {Number} year If not provided. Current year
-     * @returns {Promise<String[]>}
+     * @returns {Promise<void | Array<String>>}
     */
     async getLogByDay(day, month = new Date().getMonth(), year = new Date().getFullYear()) {
         if (!day) {
@@ -58,7 +59,9 @@ module.exports = class FileHistory {
             this.Logger.eventLog(`&_6&-0[WARN]&r&-6`, "year must be a number");
         }
 
+        // @ts-ignore
         day = day.toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false });
+        // @ts-ignore
         month = month.toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false });
         const readFile = `${this.dirPath}${year}/${month}`;
         await ReadWrite.dirIfNotExists(readFile).catch(this._handleCatch);
@@ -82,11 +85,13 @@ module.exports = class FileHistory {
             this.Logger.eventLog(`&_6&-0[WARN]&r&-6`, "year must be a number");
         }
 
+        // @ts-ignore
         month = month.toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false });
         const readDir = `${this.dirPath}${year}/${month}`;
         await ReadWrite.dirIfNotExists(readDir).catch(this._handleCatch);
         return new Promise(resolve => {
             fs.readdirSync(readDir)
+                // @ts-ignore
                 .filter(file => file.endsWith(".log") && !isNaN(file.replace(removeFileExtension, "")))
                 .forEach(async (file, index, files) => {
                     const fileName = parseInt(file.replace(removeFileExtension, ""));
@@ -114,9 +119,11 @@ module.exports = class FileHistory {
         await ReadWrite.dirIfNotExists(readDir).catch(this._handleCatch);
         return new Promise(resolve => {
             fs.readdirSync(readDir)
+                // @ts-ignore
                 .filter(folder => !isNaN(folder))
                 .forEach(async (month, index, months) => {
                     const monthName = parseInt(month);
+                    // @ts-ignore
                     logs[monthName] = await this.getLogsByMonth(month, year);
                     if (index == months.length - 1) {
                         resolve(logs);
@@ -127,7 +134,7 @@ module.exports = class FileHistory {
 
     /**
      * Get lines from the latest log file
-     * @returns {Promise<String[]>}
+     * @returns {Promise<void | Array<String>>}
     */
     async getLatestLog() {
         const readFile = `${this.dirPath}${this.year()}/${this.month()}`;

@@ -15,8 +15,10 @@ Logger.info("Info 7");
 console.log("\nLogger History");
 console.log(Logger.history.map(log => { return { prefix: log.prefix, seperator: log.seperator, log: log.clean() } }));
 console.log("\nFirst 2");
+// @ts-ignore
 console.log(Logger.history.first(2).map(log => { return { prefix: log.prefix, seperator: log.seperator, log: log.clean() } }));
 console.log("\nLast 2");
+// @ts-ignore
 console.log(Logger.history.last(2).map(log => { return { prefix: log.prefix, seperator: log.seperator, log: log.clean() } }));
 console.log("\nGet Log 5");
 console.log(Logger.history.get(log5));

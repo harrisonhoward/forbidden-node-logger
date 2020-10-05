@@ -1,7 +1,7 @@
 const Log = require("./util/structures/Log");
 const LogHistory = require("./util/structures/LogHistory");
 const FileHistory = require("./util/file/FileHistory");
-const EventEmitter = require("events");
+const { EventEmitter } = require("events");
 
 module.exports = class Logger extends EventEmitter {
     /**
@@ -10,9 +10,9 @@ module.exports = class Logger extends EventEmitter {
      * @param {String} [options.dirPath] The directory path for the log file (no file support if undefined)
      * @param {String} seperator Used to seperate the prefix and log (default if undefined)
     */
-    constructor(options = {}, seperator) {
+    constructor(options = {}, seperator = " : ") {
         super();
-        this._seperator = seperator || " : ";
+        this._seperator = seperator;
         this._prefix = options.prefix || (() => { return new Date().toISOString().replace("T", " ").substr(0, 19) });
         this._dirPath = options.dirPath;
         this._history = new LogHistory();
@@ -119,6 +119,7 @@ module.exports = class Logger extends EventEmitter {
      * @returns {JSON} 
     */
     get CONFIG() {
+        // @ts-ignore
         return require("./config.json");
     }
 

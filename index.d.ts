@@ -41,7 +41,7 @@ declare namespace NodeLogger {
         public readonly seperator: string;
         public readonly log: string;
         public readonly dateAdded: number;
-        public readonly _CODES: string;
+        public readonly _CODES: object[];
     }
 
     export class LogHistory extends Map<Key, Log> {

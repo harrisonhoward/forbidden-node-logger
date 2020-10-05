@@ -21,15 +21,17 @@ module.exports = class LogHistory extends Map {
      * @returns {LogHistory}
     */
     add(log) {
+        // @ts-ignore
         if (!log instanceof Log) {
             throw new Error("log is not an instance of Log");
         }
         if (this.size >= this._maxSize) {
-            const entries = [...this.entries];
+            // @ts-ignore
+            const entries = [...this.entries()];
             super.clear();
             this._index = 0;
             for (const [key, val] of entries) {
-                if (super.size >= this._maxSize - 1) {
+                if (this.size >= this._maxSize - 1) {
                     break;
                 }
                 super.set(key, val);
@@ -46,15 +48,17 @@ module.exports = class LogHistory extends Map {
      * @return {LogHistory}
     */
     _set(key, log) {
+        // @ts-ignore
         if (!log instanceof Log) {
             throw new Error("log is not an instance of Log");
         }
         if (this.size >= this._maxSize) {
+            // @ts-ignore
             const entries = [...this.entries()];
             super.clear();
             this._index = 0;
             for (const [key, val] of entries) {
-                if (super.size >= this._maxSize - 1) {
+                if (this.size >= this._maxSize - 1) {
                     break;
                 }
                 super.set(key, val);
@@ -69,9 +73,11 @@ module.exports = class LogHistory extends Map {
      * @returns {Log | undefined}
     */
     get(key) {
+        // @ts-ignore
         if (!key && isNaN(key) && !key instanceof Log) {
             throw new Error("key must be a number or an instance of Log");
         }
+        // @ts-ignore
         for (const [ky, val] of this) {
             if (ky == key) {
                 return val;
@@ -88,9 +94,11 @@ module.exports = class LogHistory extends Map {
      * @returns {Number | undefined}
     */
     getKey(log) {
+        // @ts-ignore
         if (!key && !key instanceof Log) {
             throw new Error("key must be a number or an instance of Log");
         }
+        // @ts-ignore
         for (const [key, val] of this) {
             if (JSON.stringify(val) == JSON.stringify(log)) {
                 return key;
@@ -105,10 +113,11 @@ module.exports = class LogHistory extends Map {
      * @param {*} thisArg If provided it will be used as this value for each invocation of callbackFn
      * @returns {Log | undefined}
     */
-    find(callbackFn, thisArg) {
+    find(callbackFn, thisArg = undefined) {
         if (thisArg != undefined) {
             callbackFn = callbackFn.bind(thisArg);
         }
+        // @ts-ignore
         for (const [key, val] of this) {
             if (callbackFn(val, key, this)) {
                 return val;
@@ -123,11 +132,12 @@ module.exports = class LogHistory extends Map {
      * @param {*} thisArg If provided it will be used as this value for each invocation of callbackFn
      * @returns {LogHistory}
     */
-    filter(callbackFn, thisArg) {
+    filter(callbackFn, thisArg = undefined) {
         if (thisArg != undefined) {
             callbackFn = callbackFn.bind(thisArg);
         }
         const res = new this.constructor[Symbol.species]();
+        // @ts-ignore
         for (const [key, val] of this) {
             if (callbackFn(val, key, this)) {
                 res.set(key, val);
@@ -142,7 +152,7 @@ module.exports = class LogHistory extends Map {
      * @param {*} thisArg If provided it will be used as this value for each invocation of callbackFn
      * @returns {Array}
     */
-    map(callbackFn, thisArg) {
+    map(callbackFn, thisArg = undefined) {
         if (thisArg != undefined) {
             callbackFn = callbackFn.bind(thisArg);
         }
@@ -159,6 +169,7 @@ module.exports = class LogHistory extends Map {
      * @returns {Boolean} If deleted
     */
     delete(key) {
+        // @ts-ignore
         if (!key && isNaN(key) && !key instanceof Log) {
             throw new Error("key must be a number or an instance of Log");
         }
@@ -181,7 +192,7 @@ module.exports = class LogHistory extends Map {
      * @param {Number} amount 
      * @returns {Log | Array<Log>}
     */
-    first(amount) {
+    first(amount = undefined) {
         if (amount == undefined || isNaN(amount)) {
             return this.values().next().value;
         }
@@ -198,7 +209,7 @@ module.exports = class LogHistory extends Map {
      * @param {Number} amount 
      * @returns {Log | Array<Log>}
     */
-    last(amount) {
+    last(amount = undefined) {
         const array = this.toArray();
         if (amount == undefined || isNaN(amount)) {
             return array[array.length - 1];
@@ -213,6 +224,7 @@ module.exports = class LogHistory extends Map {
     }
 
     toArray() {
+        // @ts-ignore
         return [...this.values()];
     }
 }

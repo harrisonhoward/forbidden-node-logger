@@ -1,3 +1,4 @@
+// @ts-ignore
 const CONFIG = require("../../config.json");
 
 module.exports = class Log {
@@ -107,7 +108,7 @@ module.exports = class Log {
 
     /**
      * The colour codes available
-     * @returns {String}
+     * @returns {Array<Object>}
     */
     get _CODES() {
         return [
