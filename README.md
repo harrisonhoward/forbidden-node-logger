@@ -29,6 +29,7 @@ const Logger = new NodeLogger({ dirPath: __dirname + "/log" });
 
 Logger.on("log", log => { /* Code */ }) // Emits when logging with any method
 Logger.on("error", log => { /* Code */ }); // Emits when doing `Logger.error();`
+// All log methods include an event "info", "debug" vice versa
 
 Logger.log("Plain log");
 Logger.log("&6Logger&r with &3colour");
