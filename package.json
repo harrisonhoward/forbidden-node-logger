@@ -2,16 +2,6 @@
   "name": "forbidden-node-logger",
   "version": "1.1.2",
   "description": "Logger package built for NodeJS",
-  "keywords": [
-    "console",
-    "logger",
-    "log",
-    "node",
-    "nodejs",
-    "js",
-    "colour",
-    "color"
-  ],
   "main": "./src/index.js",
   "scripts": {
     "log": "node test/log.js",
@@ -27,5 +17,35 @@
   "homepage": "https://github.com/Forbidden-Duck/forbidden-node-logger",
   "bugs": {
     "url": "https://github.com/Forbidden-Duck/forbidden-node-logger/issues"
-  }
+  },
+  "keywords": [
+    "console",
+    "console.log",
+    "logger",
+    "log",
+    "logs",
+    "node",
+    "nodejs",
+    "js",
+    "javascript",
+    "ts",
+    "typescript",
+    "file",
+    "support",
+    "colour",
+    "color",
+    "colours",
+    "colors",
+    "coloured",
+    "colored",
+    "info",
+    "debug",
+    "warn",
+    "error",
+    "json",
+    "simple",
+    "easy",
+    "powerful",
+    "efficient"
+  ]
 }
