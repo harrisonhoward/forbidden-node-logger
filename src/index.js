@@ -46,11 +46,16 @@ module.exports = class Logger extends EventEmitter {
 
     /**
      * Send a log message to the console
+     * @param {String} type Contains the type of log. If invalid will be prepended to logs and type will be "none"
      * @param  {...String | Object} logs Message that gets sent to the console
      * @returns {Log}
     */
-    log(...logs) {
-        const currentLog = new Log(this.prefix(), this.seperator, ...logs);
+    log(type, ...logs) {
+        if (!this.CONFIG.TYPES.includes(type)) {
+            logs.unshift(type);
+            type = "none";
+        }
+        const currentLog = new Log(this.prefix(), this.seperator, type, ...logs);
         console.log(`${currentLog.prefix}${currentLog.seperator}${currentLog.format()}`);
         this.emit("log", currentLog);
         this.history.add(currentLog);
@@ -63,8 +68,12 @@ module.exports = class Logger extends EventEmitter {
      * @param  {...String | Object} logs Message that gets sent to the console
      * @returns {Log}
     */
-    eventLog(...logs) {
-        const currentLog = new Log(this.prefix(), this.seperator, ...logs);
+    eventLog(type, ...logs) {
+        if (!this.CONFIG.TYPES.includes(type)) {
+            logs.unshift(type);
+            type = "none";
+        }
+        const currentLog = new Log(this.prefix(), this.seperator, type, ...logs);
         console.log(`${currentLog.prefix}${currentLog.seperator}${currentLog.format()}`);
         this.history.add(currentLog);
         return currentLog;
@@ -76,7 +85,7 @@ module.exports = class Logger extends EventEmitter {
      * @returns {Log}
     */
     info(...logs) {
-        const currentLog = this.log(`&_3&-0[INFO]&r&-3`, ...logs);
+        const currentLog = this.log("info", `&_3&-0[INFO]&r&-3`, ...logs);
         this.emit("info", currentLog);
         return currentLog;
     }
@@ -87,7 +96,7 @@ module.exports = class Logger extends EventEmitter {
      * @returns {Log}
     */
     debug(...logs) {
-        const currentLog = this.log(`&_2&-0[DEBUG]&r&-2`, ...logs);
+        const currentLog = this.log("debug", `&_2&-0[DEBUG]&r&-2`, ...logs);
         this.emit("debug", currentLog);
         return currentLog;
     }
@@ -98,7 +107,7 @@ module.exports = class Logger extends EventEmitter {
      * @returns {Log}
     */
     warn(...logs) {
-        const currentLog = this.log(`&_6&-0[WARN]&r&-6`, ...logs);
+        const currentLog = this.log("warn", `&_6&-0[WARN]&r&-6`, ...logs);
         this.emit("warn", currentLog);
         return currentLog;
     }
@@ -109,14 +118,14 @@ module.exports = class Logger extends EventEmitter {
      * @returns {Log}
     */
     error(...logs) {
-        const currentLog = this.log(`&_4&-0[ERROR]&r&-4`, ...logs);
+        const currentLog = this.log("error", `&_4&-0[ERROR]&r&-4`, ...logs);
         this.emit("error", currentLog);
         return currentLog;
     }
 
     /**
      * Contains all the colour codes and log types
-     * @returns {JSON} 
+     * @returns {Object} 
     */
     get CONFIG() {
         // @ts-ignore

@@ -8,11 +8,12 @@ module.exports = class Log {
      * @param {String} seperator Seperates the prefix from the log
      * @param  {...String | Object} logs The log message that was sent to the console
     */
-    constructor(prefix, seperator, ...logs) {
+    constructor(prefix, seperator, type, ...logs) {
         this._prefix = prefix;
-        this._dateAdded = new Date().valueOf();
         this._seperator = seperator;
+        this._type = type;
         this._log = "";
+        this._dateAdded = new Date().valueOf();
 
         for (const log of logs) {
             if (typeof log === "string") {
@@ -47,6 +48,14 @@ module.exports = class Log {
     */
     get seperator() {
         return this._seperator;
+    }
+
+    /**
+     * Get the type of the log
+     * @returns {String}
+    */
+    get type() {
+        return this._type;
     }
 
     /**

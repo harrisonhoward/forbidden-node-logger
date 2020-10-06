@@ -21,7 +21,7 @@ declare namespace NodeLogger {
         public debug(...log: (string | object)[]): Log;
         public warn(...log: (string | object)[]): Log;
         public error(...log: (string | object)[]): Log;
-        public readonly CONFIG: JSON;
+        public readonly CONFIG: object;
         public readonly history: LogHistory;
         public readonly fileHistory: FileHistory;
         public readonly prefix: LoggerPrefixFunction;
