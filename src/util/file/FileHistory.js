@@ -15,7 +15,7 @@ module.exports = class FileHistory {
         this.Logger = Logger;
 
         this.year = (() => { return new Date().getFullYear() });
-        this.month = (() => { return new Date().getMonth().toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) });
+        this.month = (() => { return (new Date().getMonth() + 1).toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) });
         this.day = (() => { return new Date().getDate().toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false }) });
 
         if (!this.dirPath.endsWith("/")) {
@@ -42,21 +42,21 @@ module.exports = class FileHistory {
      * @param {Number} year If not provided. Current year
      * @returns {Promise<void | Array<String>>}
     */
-    async getLogByDay(day = undefined, month = new Date().getMonth(), year = new Date().getFullYear()) {
+    async getLogByDay(day = undefined, month = new Date().getMonth() + 1, year = new Date().getFullYear()) {
         if (!day) {
             return this.getLatestLog();
         }
         if (isNaN(day)) {
             day = new Date().getDate();
-            this.Logger.eventLog(`&_6&-0[WARN]&r&-6`, "day must be a number");
+            this.Logger.eventLog("none", `&_6&-0[WARN]&r&-6`, "day must be a number");
         }
         if (isNaN(month)) {
             month = new Date().getMonth();
-            this.Logger.eventLog(`&_6&-0[WARN]&r&-6`, "month must be a number");
+            this.Logger.eventLog("none", `&_6&-0[WARN]&r&-6`, "month must be a number");
         }
         if (isNaN(year)) {
             year = new Date().getFullYear();
-            this.Logger.eventLog(`&_6&-0[WARN]&r&-6`, "year must be a number");
+            this.Logger.eventLog("none", `&_6&-0[WARN]&r&-6`, "year must be a number");
         }
 
         // @ts-ignore
@@ -74,15 +74,15 @@ module.exports = class FileHistory {
      * @param {Number} year If not provided. Current year
      * @returns {Promise<Object>} Each log identified as the number of the day (i.e. 05 will become 5)
     */
-    async getLogsByMonth(month = new Date().getMonth(), year = new Date().getFullYear()) {
+    async getLogsByMonth(month = new Date().getMonth() + 1, year = new Date().getFullYear()) {
         const logs = {};
         if (isNaN(month)) {
-            month = new Date().getMonth();
-            this.Logger.eventLog(`&_6&-0[WARN]&r&-6`, "month must be a number");
+            month = new Date().getMonth() + 1;
+            this.Logger.eventLog("none", `&_6&-0[WARN]&r&-6`, "month must be a number");
         }
         if (isNaN(year)) {
             year = new Date().getFullYear();
-            this.Logger.eventLog(`&_6&-0[WARN]&r&-6`, "year must be a number");
+            this.Logger.eventLog("none", `&_6&-0[WARN]&r&-6`, "year must be a number");
         }
 
         // @ts-ignore
@@ -113,7 +113,7 @@ module.exports = class FileHistory {
         const logs = {};
         if (isNaN(year)) {
             year = new Date().getFullYear();
-            this.Logger.eventLog(`&_6&-0[WARN]&r&-6`, "year must be a number");
+            this.Logger.eventLog("none", `&_6&-0[WARN]&r&-6`, "year must be a number");
         }
         const readDir = `${this.dirPath}${year}`;
         await ReadWrite.dirIfNotExists(readDir).catch(this._handleCatch);
@@ -147,7 +147,7 @@ module.exports = class FileHistory {
      * @param {Error} err 
     */
     _handleCatch(err) {
-        this.Logger.eventLog(`&_4&-0[ERROR]&r&-4`, err.stack);
+        this.Logger.eventLog("none", `&_4&-0[ERROR]&r&-4`, err.stack);
     }
 
     /**

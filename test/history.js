@@ -4,8 +4,8 @@ const Logger = new LogRequire({ dirPath: __dirname + "/historyLOG" });
 // Handle error by not handling it
 Logger.on("error", () => { });
 
-Logger.log("Log 1");
-Logger.log("Log 2");
+Logger.log("none", "Log 1");
+Logger.log("none", "Log 2");
 Logger.warn("Warn 3");
 Logger.error("Error 4");
 const log5 = Logger.info("Info 5");
@@ -32,7 +32,7 @@ Logger.fileHistory.getLatestLog()
             .then(arr => console.log(arr))
             .then(() => {
                 console.log("\nGet Logs by Month");
-                Logger.fileHistory.getLogsByMonth(new Date().getMonth())
+                Logger.fileHistory.getLogsByMonth(new Date().getMonth() + 1)
                     .then(obj => console.log(obj))
                     .then(() => {
                         console.log("\nGet Logs by Year");
