@@ -29,12 +29,14 @@ module.exports = class LogHistory extends Map {
             // @ts-ignore
             const entries = [...this.entries()];
             super.clear();
-            this._index = 0;
             for (const [key, val] of entries) {
                 if (this.size >= this._maxSize - 1) {
                     break;
                 }
                 super.set(key, val);
+            }
+            if (this._index >= this._maxSize * 2) {
+                this._index = 0;
             }
         }
         const key = this._index++;
@@ -56,12 +58,14 @@ module.exports = class LogHistory extends Map {
             // @ts-ignore
             const entries = [...this.entries()];
             super.clear();
-            this._index = 0;
             for (const [key, val] of entries) {
                 if (this.size >= this._maxSize - 1) {
                     break;
                 }
                 super.set(key, val);
+            }
+            if (this._index >= this._maxSize * 2) {
+                this._index = 0;
             }
         }
         return super.set(key, log);
