@@ -6,6 +6,7 @@ module.exports = class Log {
      * 
      * @param {String} prefix Prefix for each log
      * @param {String} seperator Seperates the prefix from the log
+     * @param {("none"|"info"|"debug"|"warn"|"error")} type Type of log
      * @param  {...String | Object} logs The log message that was sent to the console
     */
     constructor(prefix, seperator, type, ...logs) {
@@ -52,7 +53,7 @@ module.exports = class Log {
 
     /**
      * Get the type of the log
-     * @returns {String}
+     * @returns {("none"|"info"|"debug"|"warn"|"error")}
     */
     get type() {
         return this._type;

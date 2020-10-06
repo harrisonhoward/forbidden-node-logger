@@ -3,6 +3,7 @@ import { EventEmitter } from "events";
 declare namespace NodeLogger {
     type Key = number;
     type LoggerPrefixFunction = () => string;
+    type LoggerTypes = ["none", "info", "debug", "warn", "error"];
     interface LoggerOptions {
         prefix?: LoggerPrefixFunction,
         dirPath?: string
@@ -15,8 +16,8 @@ declare namespace NodeLogger {
         private _dirPath: string;
         private _history: LogHistory;
         private _fileHistory: FileHistory | undefined;
-        public log(...log: (string | object)[]): Log;
-        public eventLog(...log: (string | object)[]): Log;
+        public log(type: LoggerTypes, ...log: (string | object)[]): Log;
+        public eventLog(type: LoggerTypes, ...log: (string | object)[]): Log;
         public info(...log: (string | object)[]): Log;
         public debug(...log: (string | object)[]): Log;
         public warn(...log: (string | object)[]): Log;
@@ -30,15 +31,17 @@ declare namespace NodeLogger {
     }
 
     export class Log {
-        constructor(prefix: string, seperator: string, ...logs: (string | object)[]);
+        constructor(prefix: string, seperator: string, type: LoggerTypes, ...logs: (string | object)[]);
         private _prefix: string;
-        private _dateAdded: number;
         private _seperator: string;
+        private _type: LoggerTypes;
         private _log: string;
+        private _dateAdded: number;
         public format(): string;
         public clean(): string;
         public readonly prefix: string;
         public readonly seperator: string;
+        public readonly type: LoggerTypes;
         public readonly log: string;
         public readonly dateAdded: number;
         public readonly _CODES: object[];

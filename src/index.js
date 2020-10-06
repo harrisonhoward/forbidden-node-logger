@@ -46,7 +46,7 @@ module.exports = class Logger extends EventEmitter {
 
     /**
      * Send a log message to the console
-     * @param {String} type Contains the type of log. If invalid will be prepended to logs and type will be "none"
+     * @param {("none"|"info"|"debug"|"warn"|"error")} type Contains the type of log. If invalid will be prepended to logs and type will be "none"
      * @param  {...String | Object} logs Message that gets sent to the console
      * @returns {Log}
     */
@@ -65,6 +65,7 @@ module.exports = class Logger extends EventEmitter {
     /**
      * Use eventLog when logging a message INSIDE OF THE LOGGER EVENTS
      * This method does the same as log() but does not emit the log event
+     * @param {("none"|"info"|"debug"|"warn"|"error"|*)} type Contains the type of log. If invalid will be prepended to logs and type will be "none"
      * @param  {...String | Object} logs Message that gets sent to the console
      * @returns {Log}
     */
