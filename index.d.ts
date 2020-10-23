@@ -3,7 +3,7 @@ import { EventEmitter } from "events";
 declare namespace NodeLogger {
     type Key = number;
     type LoggerPrefixFunction = () => string;
-    type LoggerTypes = ["none", "info", "debug", "warn", "error"];
+    type LoggerTypes = "none" | "info" | "debug" | "warn" | "error";
     interface LoggerOptions {
         prefix?: LoggerPrefixFunction,
         dirPath?: string
