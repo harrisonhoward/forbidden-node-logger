@@ -42,6 +42,12 @@ module.exports = class Logger extends EventEmitter {
             }
             this._fileHistory = new FileHistory(this.dirPath, this);
         }
+        this.log = this.log.bind(this);
+        this.eventLog = this.eventLog.bind(this);
+        this.info = this.info.bind(this);
+        this.debug = this.debug.bind(this);
+        this.warn = this.warn.bind(this);
+        this.error = this.error.bind(this);
     }
 
     /**

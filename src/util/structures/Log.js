@@ -16,7 +16,10 @@ module.exports = class Log {
         this._log = "";
         this._dateAdded = new Date().valueOf();
 
-        for (const log of logs) {
+        for (let log of logs) {
+            if (typeof log === "number") {
+                log = log + "";
+            }
             if (typeof log === "string") {
                 this._log += log;
             } else if (typeof log.stack === "string"
