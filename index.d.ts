@@ -1,5 +1,7 @@
 import { EventEmitter } from "events";
 
+export default NodeLogger.Logger;
+
 declare namespace NodeLogger {
     type Key = number;
     type LoggerPrefixFunction = () => string;
