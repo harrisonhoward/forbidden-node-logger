@@ -12,20 +12,20 @@ npm install forbidden-node-logger
 
 ### Logger (No File Support)
 ```js
-const NodeLogger = require("forbidden-node-logger");
-const Logger = new NodeLogger();
+const NodeLogger = require("../src/index");
+const Logger = new NodeLogger.Logger();
 ```
 
 ### Logger (File Support)
 ```js
-const NodeLogger = require("forbidden-node-logger");
-const Logger = new NodeLogger({ dirPath: __dirname + "/log" });
+const NodeLogger = require("../src/index");
+const Logger = new NodeLogger.Logger({ dirPath: __dirname + "/log" });
 ```
 
 ### Logger Basics
 ```js
-const NodeLogger = require("forbidden-node-logger");
-const Logger = new NodeLogger({ dirPath: __dirname + "/log" });
+const NodeLogger = require("../src/index");
+const Logger = new NodeLogger.Logger({ dirPath: __dirname + "/log" });
 
 Logger.on("log", log => { /* Code */ }) // Emits when logging with any method
 Logger.on("error", log => { /* Code */ }); // Emits when doing `Logger.error();`
@@ -41,8 +41,8 @@ Logger.fileHistory.getLatestLog().then(lines => Logger.eventLog(lines)); // Log 
 
 ### Avoid Unhandled Rejection
 ```js
-const NodeLogger = require("forbidden-node-logger");
-const Logger = new NodeLogger({ dirPath: __dirname + "/log" });
+const NodeLogger = require("../src/index");
+const Logger = new NodeLogger.Logger({ dirPath: __dirname + "/log" });
 
 /*
 The EventEmitter will cause an unhandled rejection error

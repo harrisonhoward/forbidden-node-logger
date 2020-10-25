@@ -1,5 +1,5 @@
-const LogRequire = require("../src/index");
-const Logger = new LogRequire();
+const NodeLogger = require("../src/index");
+const Logger = new NodeLogger.Logger();
 
 Logger.on("log", log => Logger.log(log.clean()));
 Logger.eventLog("none", "This is designed to break and show off what not to do with the Logger events");

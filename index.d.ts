@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
 
-export default NodeLogger.Logger;
+declare function NodeLogger(options: object, seperator: string): NodeLogger.Logger;
 
 declare namespace NodeLogger {
     type Key = number;
@@ -92,3 +92,5 @@ declare namespace NodeLogger {
         public getLogsByYear(year?: number): Promise<object>;
     }
 }
+
+export = NodeLogger;

@@ -1,5 +1,5 @@
-const LogRequire = require("../src/index");
-const Logger = new LogRequire();
+const NodeLogger = require("../src/index");
+const Logger = new NodeLogger.Logger();
 
 Logger.on("log", log => console.log(`EVENT LOG: ${log.clean()} on ${log.prefix}`));
 Logger.on("info", log => console.log(`EVENT INFO: ${log.clean()} on ${log.prefix}\n`));

@@ -1,5 +1,5 @@
-const LogRequire = require("../src/index");
-const Logger = new LogRequire({ dirPath: __dirname + "/historyLOG" });
+const NodeLogger = require("../src/index");
+const Logger = new NodeLogger.Logger({ dirPath: __dirname + "/historyLOG" });
 
 // Handle error by not handling it
 Logger.on("error", () => { });
