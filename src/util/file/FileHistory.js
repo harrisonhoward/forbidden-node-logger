@@ -1,4 +1,4 @@
-const Logger = require("../../index");
+const { Logger } = require("../../index");
 const Log = require("../structures/Log");
 const ReadWrite = require("./ReadWrite");
 const fs = require("fs");

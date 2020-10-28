@@ -26,7 +26,11 @@ module.exports = class Log {
                 || typeof log.message === "string") {
                 this._log += log.stack ? log.stack : log.message;
             } else if (typeof log === "object") {
-                this._log += JSON.stringify(log);
+                try {
+                    this._log += require("util").inspect(log);
+                } catch (err) {
+                    this._log += JSON.stringify(log);
+                }
             } else {
                 throw new Error("log must be a \"string\" or \"object\"");
             }
