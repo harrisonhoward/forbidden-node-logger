@@ -19,6 +19,10 @@ module.exports = class Log {
             if (typeof log === "number") {
                 log = log + "";
             }
+            if (log == undefined
+                || typeof log === "undefined") {
+                log = "";
+            }
             if (typeof log === "string") {
                 this._log += log;
             } else if (typeof log.stack === "string"
