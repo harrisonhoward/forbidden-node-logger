@@ -135,7 +135,6 @@ module.exports = class Logger extends EventEmitter {
      * @returns {Object} 
     */
     get CONFIG() {
-        // @ts-ignore
         return require("./config.json");
     }
 

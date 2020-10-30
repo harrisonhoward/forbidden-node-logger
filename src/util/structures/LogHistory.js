@@ -21,8 +21,7 @@ module.exports = class LogHistory extends Map {
      * @returns {LogHistory}
     */
     add(log) {
-        // @ts-ignore
-        if (!log instanceof Log) {
+        if (!(log instanceof Log)) {
             throw new Error("log is not an instance of Log");
         }
         if (this.size >= this._maxSize) {
@@ -50,8 +49,7 @@ module.exports = class LogHistory extends Map {
      * @return {LogHistory}
     */
     _set(key, log) {
-        // @ts-ignore
-        if (!log instanceof Log) {
+        if (!(log instanceof Log)) {
             throw new Error("log is not an instance of Log");
         }
         if (this.size >= this._maxSize) {
@@ -78,7 +76,7 @@ module.exports = class LogHistory extends Map {
     */
     get(key) {
         // @ts-ignore
-        if (!key && isNaN(key) && !key instanceof Log) {
+        if (!key && isNaN(key) && !(key instanceof Log)) {
             throw new Error("key must be a number or an instance of Log");
         }
         // @ts-ignore
@@ -98,9 +96,8 @@ module.exports = class LogHistory extends Map {
      * @returns {Number | undefined}
     */
     getKey(log) {
-        // @ts-ignore
-        if (!key && !key instanceof Log) {
-            throw new Error("key must be a number or an instance of Log");
+        if (log == undefined || !(log instanceof Log)) {
+            throw new Error("log must be an instance of Log");
         }
         // @ts-ignore
         for (const [key, val] of this) {
@@ -174,7 +171,7 @@ module.exports = class LogHistory extends Map {
     */
     delete(key) {
         // @ts-ignore
-        if (!key && isNaN(key) && !key instanceof Log) {
+        if (!key && isNaN(key) && !(key instanceof Log)) {
             throw new Error("key must be a number or an instance of Log");
         }
         if (key instanceof Log) {

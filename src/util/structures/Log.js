@@ -1,4 +1,3 @@
-// @ts-ignore
 const CONFIG = require("../../config.json");
 
 module.exports = class Log {
